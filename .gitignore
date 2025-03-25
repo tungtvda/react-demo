@@ -5,6 +5,8 @@ npm-debug.log
 /typings
 /apidoc
 /node_modules
+**/node_modules
+**node_modules
 /.nyc_output
 report.html
 /coverage
