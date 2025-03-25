@@ -1,8 +1,8 @@
 import express from "express";
 import { config } from "dotenv";
 import mongoose from "mongoose";
-import routes from "./src/routes/index.js";
-
+import routes from "./routes/index.js";
+import bodyParser from "body-parser"
 // Load biến môi trường từ .env
 config();
 
@@ -11,8 +11,10 @@ const port = process.env.PORT || 3001;
 
 // Add middleware for parsing JSON
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 // Khai báo middleware routes
+
 app.use('/', routes);  // Changed this line
 
 const mongoDbConnectionOption = {
