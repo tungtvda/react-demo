@@ -69,4 +69,36 @@ controllers.loginUser=async (req,res)=>{
 		});
 	}
 }
+controllers.updateUser=async (req,res)=>{
+	try {
+		console.log(req.params.id,'req.param.id++++++++++++++')
+		const userId=req.params.id,
+		response=await userSevice.updateUser(userId, req.body);
+		return res.status(201).json({
+			status: "OK",
+			message: "User Update successfully",
+			update:response
+		  });
+	} catch (e) {
+		console.log(e,'e++++++++++++++++++++++++++')
+		return res.status(500).json({
+			status: "ERR",
+			message: "Update fail"
+		});
+	}
+}
+controllers.getUser=async (req,res)=>{
+	try {
+		return res.status(201).json({
+			status: "OK",
+			message: "getAll",
+		  });
+	} catch (e) {
+		console.log(e,'e++++++++++++++++++++++++++')
+		return res.status(500).json({
+			status: "ERR",
+			message: "Update fail"
+		});
+	}
+}
 export default controllers;

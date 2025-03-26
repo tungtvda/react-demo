@@ -2,13 +2,16 @@ import express from "express";
 import { config } from "dotenv";
 import mongoose from "mongoose";
 import routes from "./routes/index.js";
+import cors from 'cors'
 import bodyParser from "body-parser"
+
 // Load biến môi trường từ .env
 config();
 
 const app = express();
 const port = process.env.PORT || 3001;
 
+app.use(cors())
 // Add middleware for parsing JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
