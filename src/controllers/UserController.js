@@ -56,10 +56,16 @@ controllers.loginUser=async (req,res)=>{
 		}
 		
 		const newUser = await userSevice.loginUser({email, password});
-		return res.status(201).json({
-			status: "OK",
-			message: "User created successfully",
-			data: newUser,
+		if(newUser.status==="OK"){
+			return res.status(201).json({
+				status: "OK",
+				message: "User login successfully",
+				data: newUser,
+			  });
+		}
+		return res.status(500).json({
+			status: "ERR",
+			message: "User login fail",
 		  });
 	} catch (e) {
 		console.log(e,'e++++++++++++++++++++++++++')
@@ -89,9 +95,12 @@ controllers.updateUser=async (req,res)=>{
 }
 controllers.getUser=async (req,res)=>{
 	try {
+		const userId=req.params.id,
+		response=await userSevice.updateUser(userId);
 		return res.status(201).json({
 			status: "OK",
-			message: "getAll",
+			message: "Get user successfully",
+			data:response.data
 		  });
 	} catch (e) {
 		console.log(e,'e++++++++++++++++++++++++++')

@@ -59,7 +59,7 @@ service.loginUser= (newUser)=>{
 			})
 			if(checkUser===null){
 				resolve({
-					status: 'OK',
+					status: 'ERR',
 					message: 'The user is not defined'
 					});
 			}else{
@@ -137,6 +137,36 @@ service.updateUser= (userId,data)=>{
 		reject({
 			status: 'ERR',
 			message: 'An error occurred while creating user',
+			error: error.message,
+		});
+		}
+	})
+}
+service.getUser= (userId)=>{
+	return new Promise(async(resolve, reject)=>{
+		
+		try {
+			const checkUser=await User.findOne({
+                _id: new mongoose.Types.ObjectId(userId.toString())
+            })
+			if(checkUser===null){
+				resolve({
+					status: 'ERR',
+					message: 'The user is not defined'
+					});
+			}else{
+				resolve({
+					status: 'OK',
+					message: 'Get successfully',
+					data: checkUser
+					});
+			}
+		
+
+		} catch (error) {
+		reject({
+			status: 'ERR',
+			message: 'An error occurred while getting user',
 			error: error.message,
 		});
 		}
